@@ -56,7 +56,7 @@ passport.use(new GoogleStrategy({
     userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo"
   },
   function(accessToken, refreshToken, profile, cb) {
-    User.findOrCreate({ googleId: profile.id, username: profile.givenName }, function (err, user) {
+    User.findOrCreate({ googleId: profile.id}, function (err, user) {
       return cb(err, user);
     });
   }
@@ -68,7 +68,7 @@ passport.use(new FacebookStrategy({
     callbackURL: "http://localhost:5500/auth/facebook/secrets"
   },
   function(accessToken, refreshToken, profile, cb) {
-    User.findOrCreate({ facebookId: profile.id, email: email }, function (err, user) {
+    User.findOrCreate({ facebookId: profile.id}, function (err, user) {
       return cb(err, user);
     });
   }
