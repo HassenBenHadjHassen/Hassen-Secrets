@@ -22,7 +22,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-mongoose.connect("mongodb://localhost:27017/UsersDB");
+mongoose.connect("mongodb+srv://Razills:Ha963214785@cluster0.27ba9d0.mongodb.net/UsersDB");
 
 app.set('view engine', 'ejs');
 
