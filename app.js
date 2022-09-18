@@ -55,7 +55,7 @@ passport.deserializeUser(function(user, done) {
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLECLIENTID,
     clientSecret: process.env.GOOGLECLIENTSECRET,
-    callbackURL: "http://localhost:5500/auth/google/secrets",
+    callbackURL: "https://hassen-secrets.herokuapp.com/auth/google/secrets",
     userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo"
   },
   function(accessToken, refreshToken, profile, cb) {
@@ -68,7 +68,7 @@ passport.use(new GoogleStrategy({
 passport.use(new FacebookStrategy({
     clientID: process.env.FACEBOOKAPPID,
     clientSecret: process.env.FACEBOOKCLIENTSECRET,
-    callbackURL: "http://localhost:5500/auth/facebook/secrets"
+    callbackURL: "https://hassen-secrets.herokuapp.com/auth/facebook/secrets"
   },
   function(accessToken, refreshToken, profile, cb) {
     User.findOrCreate({ facebookId: profile.id}, function (err, user) {
