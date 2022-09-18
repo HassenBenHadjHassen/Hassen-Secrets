@@ -140,7 +140,11 @@ app.get("/submit", function (req, res) {
     } else {
         res.redirect("/login");
     }
-})
+});
+
+app.get('/privacy', function (req, res) {
+    res.render("privacy");
+});
 
 const schema = new passwordValidator();
 
