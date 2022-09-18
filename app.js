@@ -9,6 +9,9 @@ const passportLocalMongoose = require('passport-local-mongoose');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const FacebookStrategy = require('passport-facebook').Strategy;
 const findOrCreate = require('mongoose-findorcreate');
+const validator = require("email-validator");
+const passwordValidator = require('password-validator');
+
 
 const app = express();
 
@@ -139,19 +142,26 @@ app.get("/submit", function (req, res) {
     }
 })
 
+const schema = new passwordValidator();
 
+schema.is().min(8).is().max(100).has().uppercase().has().lowercase().has().digits(6).has().not().spaces()
 
 app.post("/register", function (req, res) {
-    User.register({username: req.body.username}, req.body.password, function (err, user) {
-        if (err) {
-            console.log(err);
-            res.redirect("/register");
-        } else {
-            passport.authenticate("local")(req, res, function () {
-                res.redirect("/secrets");
-            });
-        }
-    });
+    if (validator.validate(req.body.username) && schema.validate(req.body.password)) {
+        User.register({username: req.body.username}, req.body.password, function (err, user) {
+            if (err) {
+                console.log(err);
+                res.redirect("/register");
+            } else {
+                passport.authenticate("local")(req, res, function () {
+                    res.redirect("/secrets");
+                });
+            }
+        });
+    } else {
+        res.render("error", {action: "registering you", error: "Either your email adresse is not Valid or your Password is Weak!", retry: "/register"});
+    }
+    
 });
 
 app.post("/login",function(req, res) {

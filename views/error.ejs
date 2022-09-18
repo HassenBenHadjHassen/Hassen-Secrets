@@ -1,0 +1,7 @@
+<%- include('partials/header') %>
+    <center>
+        <h1>There was an error while <%= action %> </h1>
+        <p style="color: red;"><%= error %> </p>
+        <button class="btn btn-dark"><a style="text-decoration: none; color: white;" href=<%= retry %> >Try again</a></button>
+    </center>
+<%- include('partials/footer') %>
