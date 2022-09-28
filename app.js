@@ -25,7 +25,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-mongoose.connect("mongodb+srv://Razills:Ha963214785@cluster0.27ba9d0.mongodb.net/UsersDB");
+mongoose.connect("MONGODB SERVER");
 
 app.set('view engine', 'ejs');
 
